@@ -1,0 +1,19 @@
+<Solution>
+  <Folder Name="/src/" />
+  <Folder Name="/src/API/">
+    <Project Path="Catalog.API/Catalog.API.csproj" />
+  </Folder>
+  <Folder Name="/src/Core/">
+    <Project Path="Catalog.Application/Catalog.Application.csproj" />
+    <Project Path="Catalog.Domain/Catalog.Domain.csproj" />
+  </Folder>
+  <Folder Name="/src/Infrastructure/">
+    <Project Path="Catalog.Infrastructure/Catalog.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/UI/">
+    <Project Path="Catalog.ConsoleApp/Catalog.ConsoleApp.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="Catalog.UnitTesting/Catalog.UnitTesting.csproj" />
+  </Folder>
+</Solution>
