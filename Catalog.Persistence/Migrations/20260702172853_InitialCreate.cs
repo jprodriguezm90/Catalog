@@ -45,7 +45,7 @@ namespace Catalog.Persistence.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
-                    Price = table.Column<double>(type: "float", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     BrandId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
@@ -114,14 +114,14 @@ namespace Catalog.Persistence.Migrations
                 columns: new[] { "Id", "BrandId", "CategoryId", "Name", "Price" },
                 values: new object[,]
                 {
-                    { new Guid("0064db26-87a7-4da2-aa13-c72096303b10"), new Guid("b56a84d8-f6d7-4831-bc43-eb6b087f63b9"), new Guid("2abd90b8-845a-45f3-8081-9a49198105fb"), "Cottom Sweat Jogger", 39.990000000000002 },
-                    { new Guid("097c365a-f057-4de1-aaaf-829516c25467"), new Guid("6ca12909-23a9-4b62-a519-53e8e803e387"), new Guid("79fbd40c-96b0-4daa-a53b-0664d3a626d0"), "Pegasus Nike Runners", 99.989999999999995 },
-                    { new Guid("4db2c7d5-fc02-4bc4-a245-9f0a5396083a"), new Guid("254d8bb7-fd25-4c80-ab2f-24acbcab94c8"), new Guid("2abd90b8-845a-45f3-8081-9a49198105fb"), "Dry Sweat Jogger", 59.990000000000002 },
-                    { new Guid("59842595-1129-439e-a84f-dff86c261a3c"), new Guid("878bc0af-6692-43f2-a131-32e5d6a22532"), new Guid("2abd90b8-845a-45f3-8081-9a49198105fb"), "Cottom Sweat Jogger", 39.990000000000002 },
-                    { new Guid("8a8038f9-9df9-4a7b-a76e-414ae1312827"), new Guid("6ca12909-23a9-4b62-a519-53e8e803e387"), new Guid("e9ef65ef-a066-427d-88b0-7c7845b9c693"), "Baseball Cap Nike", 19.989999999999998 },
-                    { new Guid("99199924-e42c-4dcf-a2ea-dc482bc3c7be"), new Guid("254d8bb7-fd25-4c80-ab2f-24acbcab94c8"), new Guid("a0530e8f-c985-461d-b5ca-cce60adebe9e"), "Dry Sweat Shirt", 49.990000000000002 },
-                    { new Guid("a4aa9101-5802-4ec9-a556-468a784dcff6"), new Guid("b56a84d8-f6d7-4831-bc43-eb6b087f63b9"), new Guid("a0530e8f-c985-461d-b5ca-cce60adebe9e"), "Cottom Sweat Shirt", 29.989999999999998 },
-                    { new Guid("cf198219-da46-4264-b5ed-7565a56d26fe"), new Guid("878bc0af-6692-43f2-a131-32e5d6a22532"), new Guid("a0530e8f-c985-461d-b5ca-cce60adebe9e"), "Cottom Sweat Shirt", 29.989999999999998 }
+                    { new Guid("0064db26-87a7-4da2-aa13-c72096303b10"), new Guid("b56a84d8-f6d7-4831-bc43-eb6b087f63b9"), new Guid("2abd90b8-845a-45f3-8081-9a49198105fb"), "Cottom Sweat Jogger", 39.99m },
+                    { new Guid("097c365a-f057-4de1-aaaf-829516c25467"), new Guid("6ca12909-23a9-4b62-a519-53e8e803e387"), new Guid("79fbd40c-96b0-4daa-a53b-0664d3a626d0"), "Pegasus Nike Runners", 99.99m },
+                    { new Guid("4db2c7d5-fc02-4bc4-a245-9f0a5396083a"), new Guid("254d8bb7-fd25-4c80-ab2f-24acbcab94c8"), new Guid("2abd90b8-845a-45f3-8081-9a49198105fb"), "Dry Sweat Jogger", 59.99m },
+                    { new Guid("59842595-1129-439e-a84f-dff86c261a3c"), new Guid("878bc0af-6692-43f2-a131-32e5d6a22532"), new Guid("2abd90b8-845a-45f3-8081-9a49198105fb"), "Cottom Sweat Jogger", 39.99m },
+                    { new Guid("8a8038f9-9df9-4a7b-a76e-414ae1312827"), new Guid("6ca12909-23a9-4b62-a519-53e8e803e387"), new Guid("e9ef65ef-a066-427d-88b0-7c7845b9c693"), "Baseball Cap Nike", 19.99m },
+                    { new Guid("99199924-e42c-4dcf-a2ea-dc482bc3c7be"), new Guid("254d8bb7-fd25-4c80-ab2f-24acbcab94c8"), new Guid("a0530e8f-c985-461d-b5ca-cce60adebe9e"), "Dry Sweat Shirt", 49.99m },
+                    { new Guid("a4aa9101-5802-4ec9-a556-468a784dcff6"), new Guid("b56a84d8-f6d7-4831-bc43-eb6b087f63b9"), new Guid("a0530e8f-c985-461d-b5ca-cce60adebe9e"), "Cottom Sweat Shirt", 29.99m },
+                    { new Guid("cf198219-da46-4264-b5ed-7565a56d26fe"), new Guid("878bc0af-6692-43f2-a131-32e5d6a22532"), new Guid("a0530e8f-c985-461d-b5ca-cce60adebe9e"), "Cottom Sweat Shirt", 29.99m }
                 });
 
             migrationBuilder.InsertData(

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Catalog.Persistence.Migrations
 {
     [DbContext(typeof(CatalogDbContext))]
-    [Migration("20260702151835_InitialCreate")]
+    [Migration("20260702172853_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -132,8 +132,8 @@ namespace Catalog.Persistence.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
@@ -150,7 +150,7 @@ namespace Catalog.Persistence.Migrations
                             BrandId = new Guid("878bc0af-6692-43f2-a131-32e5d6a22532"),
                             CategoryId = new Guid("a0530e8f-c985-461d-b5ca-cce60adebe9e"),
                             Name = "Cottom Sweat Shirt",
-                            Price = 29.989999999999998
+                            Price = 29.99m
                         },
                         new
                         {
@@ -158,7 +158,7 @@ namespace Catalog.Persistence.Migrations
                             BrandId = new Guid("878bc0af-6692-43f2-a131-32e5d6a22532"),
                             CategoryId = new Guid("2abd90b8-845a-45f3-8081-9a49198105fb"),
                             Name = "Cottom Sweat Jogger",
-                            Price = 39.990000000000002
+                            Price = 39.99m
                         },
                         new
                         {
@@ -166,7 +166,7 @@ namespace Catalog.Persistence.Migrations
                             BrandId = new Guid("254d8bb7-fd25-4c80-ab2f-24acbcab94c8"),
                             CategoryId = new Guid("a0530e8f-c985-461d-b5ca-cce60adebe9e"),
                             Name = "Dry Sweat Shirt",
-                            Price = 49.990000000000002
+                            Price = 49.99m
                         },
                         new
                         {
@@ -174,7 +174,7 @@ namespace Catalog.Persistence.Migrations
                             BrandId = new Guid("254d8bb7-fd25-4c80-ab2f-24acbcab94c8"),
                             CategoryId = new Guid("2abd90b8-845a-45f3-8081-9a49198105fb"),
                             Name = "Dry Sweat Jogger",
-                            Price = 59.990000000000002
+                            Price = 59.99m
                         },
                         new
                         {
@@ -182,7 +182,7 @@ namespace Catalog.Persistence.Migrations
                             BrandId = new Guid("6ca12909-23a9-4b62-a519-53e8e803e387"),
                             CategoryId = new Guid("e9ef65ef-a066-427d-88b0-7c7845b9c693"),
                             Name = "Baseball Cap Nike",
-                            Price = 19.989999999999998
+                            Price = 19.99m
                         },
                         new
                         {
@@ -190,7 +190,7 @@ namespace Catalog.Persistence.Migrations
                             BrandId = new Guid("6ca12909-23a9-4b62-a519-53e8e803e387"),
                             CategoryId = new Guid("79fbd40c-96b0-4daa-a53b-0664d3a626d0"),
                             Name = "Pegasus Nike Runners",
-                            Price = 99.989999999999995
+                            Price = 99.99m
                         },
                         new
                         {
@@ -198,7 +198,7 @@ namespace Catalog.Persistence.Migrations
                             BrandId = new Guid("b56a84d8-f6d7-4831-bc43-eb6b087f63b9"),
                             CategoryId = new Guid("2abd90b8-845a-45f3-8081-9a49198105fb"),
                             Name = "Cottom Sweat Jogger",
-                            Price = 39.990000000000002
+                            Price = 39.99m
                         },
                         new
                         {
@@ -206,7 +206,7 @@ namespace Catalog.Persistence.Migrations
                             BrandId = new Guid("b56a84d8-f6d7-4831-bc43-eb6b087f63b9"),
                             CategoryId = new Guid("a0530e8f-c985-461d-b5ca-cce60adebe9e"),
                             Name = "Cottom Sweat Shirt",
-                            Price = 29.989999999999998
+                            Price = 29.99m
                         });
                 });
 

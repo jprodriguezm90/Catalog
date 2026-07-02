@@ -1,4 +1,5 @@
 ﻿using Catalog.Application.Features.Products.Commands.CreateProduct;
+using Catalog.Application.Features.Products.Queries.GetProductDetail;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,5 +14,12 @@ public class ProductsController(IMediator mediator) : ControllerBase
     {
         var result = await mediator.Send(command);
         return Ok(result);
+    }
+
+    [HttpGet("{id}", Name = "GetProductById")]
+    public async Task<IActionResult> GetProduct(Guid id)
+    {
+        var getEventDetailQuery = new GetProductDetailQuery() { ProductId = id };
+        return Ok(await mediator.Send(getEventDetailQuery));
     }
 }
