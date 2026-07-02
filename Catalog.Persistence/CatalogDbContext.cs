@@ -1,14 +1,10 @@
-﻿using Catalog.Domain;
+﻿using Catalog.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Catalog.Infrastructure.Implementation.Persistence;
+namespace Catalog.Persistence;
 
-public class CatalogDbContext : DbContext
+public class CatalogDbContext(DbContextOptions<CatalogDbContext> options) : DbContext(options)
 {
-    public CatalogDbContext(DbContextOptions<CatalogDbContext> options) : base(options)
-    {
-    }
-
     public DbSet<Product> Products => Set<Product>();
     public DbSet<Category> Categories => Set<Category>();
     public DbSet<Brand> Brands => Set<Brand>();
@@ -54,10 +50,6 @@ public class CatalogDbContext : DbContext
                     new { Id = new Guid("DC8DFA43-4CF6-4106-9B42-DE66C0CDA92E"), ProductId = new Guid("4DB2C7D5-FC02-4BC4-A245-9F0A5396083A"), Size = "M", InStore = 10, Online = 50 },
                     new { Id = new Guid("EB58CDD8-0672-473A-B403-B695A2527D8D"), ProductId = new Guid("4DB2C7D5-FC02-4BC4-A245-9F0A5396083A"), Size = "L", InStore = 10, Online = 50 },
                     
-                    new { Id = new Guid("25B35AC8-3D7C-4513-A58E-880CB3A96062"), ProductId = new Guid("8A8038F9-9DF9-4A7B-A76E-414AE1312827"), Size = "S", InStore = 10, Online = 50 },
-                    new { Id = new Guid("59CCED59-0749-4B61-A2B8-D1422348530C"), ProductId = new Guid("8A8038F9-9DF9-4A7B-A76E-414AE1312827"), Size = "M", InStore = 10, Online = 50 },
-                    new { Id = new Guid("24DE1CBC-39CF-491A-B247-687E6DD1399D"), ProductId = new Guid("8A8038F9-9DF9-4A7B-A76E-414AE1312827"), Size = "L", InStore = 10, Online = 50 },
-
                     new { Id = new Guid("5C787691-F278-4FD7-BE10-5AFC6BDA1292"), ProductId = new Guid("0064DB26-87A7-4DA2-AA13-C72096303B10"), Size = "S", InStore = 10, Online = 50 },
                     new { Id = new Guid("3AEDD23A-4E5E-46C3-9C0E-110FB4392D55"), ProductId = new Guid("0064DB26-87A7-4DA2-AA13-C72096303B10"), Size = "M", InStore = 10, Online = 50 },
                     new { Id = new Guid("93D82DA8-8CF7-496F-85ED-8B8515607BAE"), ProductId = new Guid("0064DB26-87A7-4DA2-AA13-C72096303B10"), Size = "L", InStore = 10, Online = 50 },
@@ -108,23 +100,29 @@ public class CatalogDbContext : DbContext
         modelBuilder.Entity<Category>().HasData(new Category
         {
             Id = shirtGuid,
-            Name = "Shirts"
+            Name = "Shirts",
+            Description = """Shirts are a type of clothing worn on the upper body, typically made of fabric and designed to cover the torso and arms. They come in various styles, such as dress shirts, casual shirts, and t-shirts, and can be made from different materials like cotton, linen, or synthetic fabrics."""
         });
 
         modelBuilder.Entity<Category>().HasData(new Category
         {
             Id = pantsGuid,
-            Name = "Pants"
+            Name = "Pants",
+            Description = """Pants are a type of clothing worn on the lower body, covering the legs and typically extending from the waist to the ankles. They come in various styles, such as jeans, trousers, leggings, and shorts, and can be made from different materials like denim, cotton, or synthetic fabrics."""
+
         });
         modelBuilder.Entity<Category>().HasData(new Category
         {
             Id = shoesGuid,
-            Name = "Shoes"
+            Name = "Shoes",
+            Description = """Shoes are a type of footwear designed to protect and provide comfort to the feet while walking, running, or engaging in various activities. They come in various styles, such as sneakers, boots, sandals, and dress shoes, and can be made from different materials like leather, canvas, or synthetic fabrics."""
+
         });
         modelBuilder.Entity<Category>().HasData(new Category
         {
             Id = capsGuid,
-            Name = "Caps"
+            Name = "Caps",
+            Description = """Caps are a type of headwear that typically features a rounded crown and a visor or brim at the front. They are designed to provide shade and protection from the sun, as well as to serve as a fashion accessory. Caps come in various styles, such as baseball caps, snapbacks, and fitted caps, and can be made from different materials like cotton, wool, or synthetic fabrics."""
         });
 
         var gymSharkGuid = Guid.Parse("{878BC0AF-6692-43F2-A131-32E5D6A22532}");
@@ -159,24 +157,27 @@ public class CatalogDbContext : DbContext
 
         modelBuilder.Entity<Product>().HasData(new Product
         {
-            Id = new Guid("CF198219-DA46-4264-B5ED-7565A56D26FE")
-            ,Name = "Cottom Sweat Shirt"
-            ,BrandId = gymSharkGuid
-            ,CategoryId = shirtGuid
-
-        });
-        modelBuilder.Entity<Product>().HasData(new Product
-        {
-            Id = new Guid("59842595-1129-439E-A84F-DFF86C261A3C"),
-            Name = "Cottom Sweat Jogger",
+            Id = new Guid("CF198219-DA46-4264-B5ED-7565A56D26FE"),
+            Name = "Cottom Sweat Shirt",
+            Price = 29.99M,
             BrandId = gymSharkGuid,
             CategoryId = shirtGuid
 
         });
         modelBuilder.Entity<Product>().HasData(new Product
         {
+            Id = new Guid("59842595-1129-439E-A84F-DFF86C261A3C"),
+            Name = "Cottom Sweat Jogger",
+            Price = 39.99M,
+            BrandId = gymSharkGuid,
+            CategoryId = pantsGuid
+
+        });
+        modelBuilder.Entity<Product>().HasData(new Product
+        {
             Id = new Guid("99199924-E42C-4DCF-A2EA-DC482BC3C7BE"),
             Name = "Dry Sweat Shirt",
+            Price = 49.99M,
             BrandId = adidasGuid,
             CategoryId = shirtGuid
 
@@ -184,14 +185,16 @@ public class CatalogDbContext : DbContext
         modelBuilder.Entity<Product>().HasData(new Product
         {
             Id = new Guid("4DB2C7D5-FC02-4BC4-A245-9F0A5396083A"),
-            Name = "Dry Sweat Shirt",
+            Name = "Dry Sweat Jogger",
+            Price = 59.99M,
             BrandId = adidasGuid,
-            CategoryId = shirtGuid
+            CategoryId = pantsGuid
         });
         modelBuilder.Entity<Product>().HasData(new Product
         {
             Id = new Guid("8A8038F9-9DF9-4A7B-A76E-414AE1312827"),
             Name = "Baseball Cap Nike",
+            Price = 19.99M,
             BrandId = nikeGuid,
             CategoryId = capsGuid
         });
@@ -199,6 +202,7 @@ public class CatalogDbContext : DbContext
         {
             Id = new Guid("097C365A-F057-4DE1-AAAF-829516C25467"),
             Name = "Pegasus Nike Runners",
+            Price = 99.99M,
             BrandId = nikeGuid,
             CategoryId = shoesGuid
 
@@ -207,6 +211,7 @@ public class CatalogDbContext : DbContext
         {
             Id = new Guid("0064DB26-87A7-4DA2-AA13-C72096303B10"),
             Name = "Cottom Sweat Jogger",
+            Price = 39.99M,
             BrandId = diadoraGuid,
             CategoryId = pantsGuid
 
@@ -215,6 +220,7 @@ public class CatalogDbContext : DbContext
         {
             Id = new Guid("A4AA9101-5802-4EC9-A556-468A784DCFF6"),
             Name = "Cottom Sweat Shirt",
+            Price = 29.99M,
             BrandId = diadoraGuid,
             CategoryId = shirtGuid
 

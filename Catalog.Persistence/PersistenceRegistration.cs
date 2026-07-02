@@ -1,15 +1,14 @@
 ﻿using Catalog.Application.Contracts.Persistence;
-using Catalog.Infrastructure.Implementation.Persistence;
-using Catalog.Infrastructure.Implementation.Persistence.Repositories;
+using Catalog.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Catalog.Infrastructure.Implementation;
+namespace Catalog.Persistence;
 
-public static class InfrastructureRegistration
+public static class PersistenceRegistration
 {
-    public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
     {
         var connectionString = configuration.GetConnectionString("CatalogDatabase")
             ?? throw new InvalidOperationException("Connection string 'CatalogDatabase' was not found.");

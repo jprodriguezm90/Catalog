@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace Catalog.Infrastructure.Migrations
+namespace Catalog.Persistence.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration
@@ -45,6 +45,7 @@ namespace Catalog.Infrastructure.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
+                    Price = table.Column<double>(type: "float", nullable: false),
                     CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     BrandId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
@@ -102,25 +103,25 @@ namespace Catalog.Infrastructure.Migrations
                 columns: new[] { "Id", "Description", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("2abd90b8-845a-45f3-8081-9a49198105fb"), null, "Pants" },
-                    { new Guid("79fbd40c-96b0-4daa-a53b-0664d3a626d0"), null, "Shoes" },
-                    { new Guid("a0530e8f-c985-461d-b5ca-cce60adebe9e"), null, "Shirts" },
-                    { new Guid("e9ef65ef-a066-427d-88b0-7c7845b9c693"), null, "Caps" }
+                    { new Guid("2abd90b8-845a-45f3-8081-9a49198105fb"), "Pants are a type of clothing worn on the lower body, covering the legs and typically extending from the waist to the ankles. They come in various styles, such as jeans, trousers, leggings, and shorts, and can be made from different materials like denim, cotton, or synthetic fabrics.", "Pants" },
+                    { new Guid("79fbd40c-96b0-4daa-a53b-0664d3a626d0"), "Shoes are a type of footwear designed to protect and provide comfort to the feet while walking, running, or engaging in various activities. They come in various styles, such as sneakers, boots, sandals, and dress shoes, and can be made from different materials like leather, canvas, or synthetic fabrics.", "Shoes" },
+                    { new Guid("a0530e8f-c985-461d-b5ca-cce60adebe9e"), "Shirts are a type of clothing worn on the upper body, typically made of fabric and designed to cover the torso and arms. They come in various styles, such as dress shirts, casual shirts, and t-shirts, and can be made from different materials like cotton, linen, or synthetic fabrics.", "Shirts" },
+                    { new Guid("e9ef65ef-a066-427d-88b0-7c7845b9c693"), "Caps are a type of headwear that typically features a rounded crown and a visor or brim at the front. They are designed to provide shade and protection from the sun, as well as to serve as a fashion accessory. Caps come in various styles, such as baseball caps, snapbacks, and fitted caps, and can be made from different materials like cotton, wool, or synthetic fabrics.", "Caps" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Products",
-                columns: new[] { "Id", "BrandId", "CategoryId", "Name" },
+                columns: new[] { "Id", "BrandId", "CategoryId", "Name", "Price" },
                 values: new object[,]
                 {
-                    { new Guid("0064db26-87a7-4da2-aa13-c72096303b10"), new Guid("b56a84d8-f6d7-4831-bc43-eb6b087f63b9"), new Guid("2abd90b8-845a-45f3-8081-9a49198105fb"), "Cottom Sweat Jogger" },
-                    { new Guid("097c365a-f057-4de1-aaaf-829516c25467"), new Guid("6ca12909-23a9-4b62-a519-53e8e803e387"), new Guid("79fbd40c-96b0-4daa-a53b-0664d3a626d0"), "Pegasus Nike Runners" },
-                    { new Guid("4db2c7d5-fc02-4bc4-a245-9f0a5396083a"), new Guid("254d8bb7-fd25-4c80-ab2f-24acbcab94c8"), new Guid("a0530e8f-c985-461d-b5ca-cce60adebe9e"), "Dry Sweat Shirt" },
-                    { new Guid("59842595-1129-439e-a84f-dff86c261a3c"), new Guid("878bc0af-6692-43f2-a131-32e5d6a22532"), new Guid("a0530e8f-c985-461d-b5ca-cce60adebe9e"), "Cottom Sweat Jogger" },
-                    { new Guid("8a8038f9-9df9-4a7b-a76e-414ae1312827"), new Guid("6ca12909-23a9-4b62-a519-53e8e803e387"), new Guid("e9ef65ef-a066-427d-88b0-7c7845b9c693"), "Baseball Cap Nike" },
-                    { new Guid("99199924-e42c-4dcf-a2ea-dc482bc3c7be"), new Guid("254d8bb7-fd25-4c80-ab2f-24acbcab94c8"), new Guid("a0530e8f-c985-461d-b5ca-cce60adebe9e"), "Dry Sweat Shirt" },
-                    { new Guid("a4aa9101-5802-4ec9-a556-468a784dcff6"), new Guid("b56a84d8-f6d7-4831-bc43-eb6b087f63b9"), new Guid("a0530e8f-c985-461d-b5ca-cce60adebe9e"), "Cottom Sweat Shirt" },
-                    { new Guid("cf198219-da46-4264-b5ed-7565a56d26fe"), new Guid("878bc0af-6692-43f2-a131-32e5d6a22532"), new Guid("a0530e8f-c985-461d-b5ca-cce60adebe9e"), "Cottom Sweat Shirt" }
+                    { new Guid("0064db26-87a7-4da2-aa13-c72096303b10"), new Guid("b56a84d8-f6d7-4831-bc43-eb6b087f63b9"), new Guid("2abd90b8-845a-45f3-8081-9a49198105fb"), "Cottom Sweat Jogger", 39.990000000000002 },
+                    { new Guid("097c365a-f057-4de1-aaaf-829516c25467"), new Guid("6ca12909-23a9-4b62-a519-53e8e803e387"), new Guid("79fbd40c-96b0-4daa-a53b-0664d3a626d0"), "Pegasus Nike Runners", 99.989999999999995 },
+                    { new Guid("4db2c7d5-fc02-4bc4-a245-9f0a5396083a"), new Guid("254d8bb7-fd25-4c80-ab2f-24acbcab94c8"), new Guid("2abd90b8-845a-45f3-8081-9a49198105fb"), "Dry Sweat Jogger", 59.990000000000002 },
+                    { new Guid("59842595-1129-439e-a84f-dff86c261a3c"), new Guid("878bc0af-6692-43f2-a131-32e5d6a22532"), new Guid("2abd90b8-845a-45f3-8081-9a49198105fb"), "Cottom Sweat Jogger", 39.990000000000002 },
+                    { new Guid("8a8038f9-9df9-4a7b-a76e-414ae1312827"), new Guid("6ca12909-23a9-4b62-a519-53e8e803e387"), new Guid("e9ef65ef-a066-427d-88b0-7c7845b9c693"), "Baseball Cap Nike", 19.989999999999998 },
+                    { new Guid("99199924-e42c-4dcf-a2ea-dc482bc3c7be"), new Guid("254d8bb7-fd25-4c80-ab2f-24acbcab94c8"), new Guid("a0530e8f-c985-461d-b5ca-cce60adebe9e"), "Dry Sweat Shirt", 49.990000000000002 },
+                    { new Guid("a4aa9101-5802-4ec9-a556-468a784dcff6"), new Guid("b56a84d8-f6d7-4831-bc43-eb6b087f63b9"), new Guid("a0530e8f-c985-461d-b5ca-cce60adebe9e"), "Cottom Sweat Shirt", 29.989999999999998 },
+                    { new Guid("cf198219-da46-4264-b5ed-7565a56d26fe"), new Guid("878bc0af-6692-43f2-a131-32e5d6a22532"), new Guid("a0530e8f-c985-461d-b5ca-cce60adebe9e"), "Cottom Sweat Shirt", 29.989999999999998 }
                 });
 
             migrationBuilder.InsertData(
@@ -131,13 +132,10 @@ namespace Catalog.Infrastructure.Migrations
                     { new Guid("03a001e7-168d-43a5-a599-a07b1ad3a692"), 10, 50, new Guid("cf198219-da46-4264-b5ed-7565a56d26fe"), "L" },
                     { new Guid("0f62f318-c85f-4b9a-8580-a07321c57d85"), 10, 50, new Guid("a4aa9101-5802-4ec9-a556-468a784dcff6"), "L" },
                     { new Guid("15fad713-5f5b-4c79-90e4-cc0d64eacf4b"), 10, 50, new Guid("99199924-e42c-4dcf-a2ea-dc482bc3c7be"), "M" },
-                    { new Guid("24de1cbc-39cf-491a-b247-687e6dd1399d"), 10, 50, new Guid("8a8038f9-9df9-4a7b-a76e-414ae1312827"), "L" },
-                    { new Guid("25b35ac8-3d7c-4513-a58e-880cb3a96062"), 10, 50, new Guid("8a8038f9-9df9-4a7b-a76e-414ae1312827"), "S" },
                     { new Guid("2b068228-d46c-4cbb-bc37-db70f1b284c9"), 10, 50, new Guid("cf198219-da46-4264-b5ed-7565a56d26fe"), "M" },
                     { new Guid("3546c25a-03c4-4fd1-93dd-faef228a6035"), 10, 50, new Guid("99199924-e42c-4dcf-a2ea-dc482bc3c7be"), "L" },
                     { new Guid("3aedd23a-4e5e-46c3-9c0e-110fb4392d55"), 10, 50, new Guid("0064db26-87a7-4da2-aa13-c72096303b10"), "M" },
                     { new Guid("57904706-5617-43f7-93b1-1693c11cba99"), 10, 50, new Guid("cf198219-da46-4264-b5ed-7565a56d26fe"), "S" },
-                    { new Guid("59cced59-0749-4b61-a2b8-d1422348530c"), 10, 50, new Guid("8a8038f9-9df9-4a7b-a76e-414ae1312827"), "M" },
                     { new Guid("5c787691-f278-4fd7-be10-5afc6bda1292"), 10, 50, new Guid("0064db26-87a7-4da2-aa13-c72096303b10"), "S" },
                     { new Guid("666eb407-dc0c-4db7-ba61-f63b013cef82"), 10, 50, new Guid("4db2c7d5-fc02-4bc4-a245-9f0a5396083a"), "S" },
                     { new Guid("6bc34f4b-6603-47b4-9d7a-1e1091ba9d0e"), 10, 50, new Guid("59842595-1129-439e-a84f-dff86c261a3c"), "S" },

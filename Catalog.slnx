@@ -9,6 +9,7 @@
   </Folder>
   <Folder Name="/src/Infrastructure/">
     <Project Path="Catalog.Infrastructure/Catalog.Infrastructure.csproj" />
+    <Project Path="Catalog.Persistence/Catalog.Persistence.csproj" Id="834a8808-53fb-4423-b00a-94ef0532cc9b" />
   </Folder>
   <Folder Name="/src/UI/">
     <Project Path="Catalog.ConsoleApp/Catalog.ConsoleApp.csproj" />
