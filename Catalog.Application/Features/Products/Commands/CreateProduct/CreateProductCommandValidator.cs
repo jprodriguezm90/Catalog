@@ -1,7 +1,5 @@
 ﻿using Catalog.Application.Contracts.Persistence;
 using FluentValidation;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Catalog.Application.Features.Products.Commands.CreateProduct;
 
@@ -28,8 +26,10 @@ public class CreateProductCommandValidator : AbstractValidator<CreateProductComm
         RuleFor(p => p.CategoryId)
             .NotEmpty().WithMessage("{PropertyName} is required.");
 
+        RuleFor(p => p.Stocks)
+            .NotNull().WithMessage("Stock cannot be null.");
+
         RuleForEach(p => p.Stocks)
-            .NotNull().WithMessage("Stock cannot be null.")
             .ChildRules(stocks =>
             {
                 stocks.RuleFor(s => s.Size)
