@@ -1,21 +1,24 @@
 ﻿using AutoMapper;
 using Catalog.Application.Contracts.Persistence;
+using Catalog.Application.Exceptions;
 using Catalog.Domain.Entities;
 using MediatR;
 
 namespace Catalog.Application.Features.Products.Queries.GetProductDetail;
 
-public class GetProductDetailHandler(IMapper mapper, IAsyncRepository<Product> productRepository, IAsyncRepository<Category> categoryRepository, IAsyncRepository<Brand> brandRepository) : IRequestHandler<GetProductDetailQuery, ProductDetailVm>
+public class GetProductDetailHandler(IMapper mapper, IProductRepository productRepository) : IRequestHandler<GetProductDetailQuery, ProductDetailVm>
 {
     public async Task<ProductDetailVm> Handle(GetProductDetailQuery request, CancellationToken cancellationToken)
     {
-        var product = await productRepository.GetByIdAsync(request.ProductId);
-        var brand = await brandRepository.GetByIdAsync(product.BrandId);
-        var category = await categoryRepository.GetByIdAsync(product.CategoryId);
+        
+        var product = await productRepository.GetProductDetailAsync(request.ProductId);
+
+        if (product is null)
+            throw new NotFoundException(nameof(Product), request.ProductId);
 
         var productDetailVm = mapper.Map<ProductDetailVm>(product);
-        productDetailVm.BrandName = mapper.Map<ProductDetailBrandDto>(brand).Name;
-        productDetailVm.CategoryName = mapper.Map<ProductDetailCategoryDto>(category).Name;
+        productDetailVm.BrandName = product.Brand.Name;
+        productDetailVm.CategoryName = product.Category.Name;
 
         return productDetailVm;
     }

@@ -19,7 +19,7 @@ public class ProductsController(IMediator mediator) : ControllerBase
     [HttpGet("{id}", Name = "GetProductById")]
     public async Task<IActionResult> GetProduct(Guid id)
     {
-        var getEventDetailQuery = new GetProductDetailQuery() { ProductId = id };
-        return Ok(await mediator.Send(getEventDetailQuery));
+        var getProductDetailQuery = new GetProductDetailQuery() { ProductId = id };
+        return Ok(await mediator.Send(getProductDetailQuery));
     }
 }

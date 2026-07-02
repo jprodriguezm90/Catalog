@@ -34,12 +34,12 @@ public class CreateProductCommandValidator : AbstractValidator<CreateProductComm
             {
                 stocks.RuleFor(s => s.Size)
                     .NotEmpty().WithMessage("{PropertyName} is required.");
-                
+
                 stocks.RuleFor(s => s.InStore)
-                    .LessThan(0);
+                    .GreaterThanOrEqualTo(0);
 
                 stocks.RuleFor(s => s.Online)
-                    .LessThan(0);
+                    .GreaterThanOrEqualTo(0);
 
             });
 
@@ -50,6 +50,6 @@ public class CreateProductCommandValidator : AbstractValidator<CreateProductComm
 
     private async Task<bool> ProductNameAndBrandUnique(CreateProductCommand e, CancellationToken token)
     {
-        return !await _productRepository.IsProductNameAndBrandUnique(e.Name, e.BrandId);
+        return await _productRepository.IsProductNameAndBrandUnique(e.Name, e.BrandId);
     }
 }
