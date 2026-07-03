@@ -1,7 +1,6 @@
 ﻿using Catalog.Application.Contracts.Persistence;
 using Catalog.Domain.Entities;
 using Moq;
-using System.Reflection.Emit;
 
 namespace Catalog.Application.UnitTests.Mocks;
 
@@ -30,6 +29,9 @@ public class RepositoryMocks
                 (Guid id) => 
                     products.FirstOrDefault(p => p.Id == id));
 
+        mockProductRepository.Setup (repo => repo
+            .IsProductNameAndBrandUnique(It.IsAny<string>(),It.IsAny<Guid>()))
+            .ReturnsAsync(true);
 
         return mockProductRepository;
     }
