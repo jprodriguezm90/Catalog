@@ -15,6 +15,6 @@
     <Project Path="Catalog.ConsoleApp/Catalog.ConsoleApp.csproj" />
   </Folder>
   <Folder Name="/tests/">
-    <Project Path="Catalog.UnitTesting/Catalog.UnitTesting.csproj" />
+    <Project Path="Catalog.Application.UnitTests/Catalog.Application.UnitTests.csproj" Id="8c52c970-3f1a-45bb-81a2-499c687281c1" />
   </Folder>
 </Solution>
