@@ -231,9 +231,6 @@ public class CatalogDbContext : DbContext
 
         });
 
-
-
-
     }
 
 }
